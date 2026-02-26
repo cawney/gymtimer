@@ -1,0 +1,15 @@
+# Binary
+gymtimer
+gymtimer-pi
+
+# Generated assets
+assets/beep.wav
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
