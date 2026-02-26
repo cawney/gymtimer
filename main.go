@@ -25,19 +25,29 @@ func main() {
 	}
 
 	beepPath := filepath.Join(assetsDir, "beep.wav")
+	chimePath := filepath.Join(assetsDir, "chime.wav")
+
+	// Create assets directory if needed
+	if err := os.MkdirAll(assetsDir, 0755); err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: could not create assets directory: %v\n", err)
+	}
 
 	// Generate beep sound if it doesn't exist
 	if _, err := os.Stat(beepPath); os.IsNotExist(err) {
-		if err := os.MkdirAll(assetsDir, 0755); err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: could not create assets directory: %v\n", err)
-		}
 		if err := audio.GenerateBeepWAV(beepPath); err != nil {
 			fmt.Fprintf(os.Stderr, "Warning: could not generate beep sound: %v\n", err)
 		}
 	}
 
+	// Generate chime sound if it doesn't exist
+	if _, err := os.Stat(chimePath); os.IsNotExist(err) {
+		if err := audio.GenerateChimeWAV(chimePath); err != nil {
+			fmt.Fprintf(os.Stderr, "Warning: could not generate chime sound: %v\n", err)
+		}
+	}
+
 	// Create audio player
-	audioPlayer := audio.New(beepPath)
+	audioPlayer := audio.New(beepPath, chimePath)
 
 	// Create the app model
 	model := ui.New(audioPlayer)

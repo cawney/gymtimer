@@ -3,7 +3,7 @@ gymtimer
 gymtimer-pi
 
 # Generated assets
-assets/beep.wav
+assets/*.wav
 
 # IDE
 .idea/
